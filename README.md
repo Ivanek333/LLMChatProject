@@ -1,5 +1,6 @@
 # LLMChatProject
 Just a kind of pet-project, chatting service with LLMs based on microservice architecture
+
 Used technologies:
 - Clean architecture
 - EF
