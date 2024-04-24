@@ -1,0 +1,169 @@
+{
+  "Routes": [
+
+    // Authentication Web API
+
+    {
+      "UpstreamPathTemplate": "/api/Account/authenticate",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authenticationwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Account/authenticate"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Account/register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authenticationwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Account/register"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Account/update-llm-parameters",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authenticationwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Account/update-llm-parameters",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+
+    // Chat Web API
+
+    {
+      "UpstreamPathTemplate": "/api/Chat/getmodels",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Chat/getmodels"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Chat/getchatsinfo",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Chat/getchatsinfo",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Chat/get",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Chat/get",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Chat/create",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Chat/create",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Chat/update-llm-parameters",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Chat/update-llm-parameters",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Chat/message/send",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Chat/message/send",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Chat/message/delete",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Chat/message/delete",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    }
+
+    /*
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "60s",
+        "PeriodTimespan": 60,
+        "Limit": 1
+      }
+    */
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8001" /*,
+    "RateLimitOptions": {
+      "QuotaExceededMessage": "Request not allowed",
+      "HttpStatusCode": 909
+    }*/
+  }
+}

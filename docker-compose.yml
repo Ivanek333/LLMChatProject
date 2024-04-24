@@ -1,0 +1,74 @@
+version: '3.4'
+
+networks:
+  backend:
+  frontend:
+
+services:
+
+    #chat
+  chatdb:
+    container_name: chat-db
+    image: mysql:8.0.29-oracle
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+    networks:
+      - backend
+    ports:
+      - "18001:3306"
+
+  chatwebapi:
+    image: ${DOCKER_REGISTRY-}chatwebapi
+    build:
+      context: .
+      dockerfile: ChatWebAPI/Dockerfile
+    environment:
+      - DB_HOST=chatdb
+      - DB_NAME=chat_db
+      - DB_ROOT_PASSWORD=${DB_PASS}
+      - OPENAI_ENDPOINT=https://api.openai.com/v1/chat/completions
+      - OPENAI_TOKEN=${OPEN_AI_TOKEN}
+    networks:
+      - backend
+    depends_on:
+      - chatdb
+
+    #auth
+  userdb:
+    container_name: user-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${DB_PASS}
+      - Encrypt=False
+    networks:
+      - backend
+    ports:
+      - "18002:1433"
+
+  authenticationwebapi:
+    image: ${DOCKER_REGISTRY-}authenticationwebapi
+    build:
+      context: .
+      dockerfile: AuthenticationWebAPI/Dockerfile
+    environment:
+      - DB_HOST=userdb
+      - DB_NAME=user_db
+      - DB_SA_PASSWORD=${DB_PASS}
+    networks:
+      - backend
+    depends_on:
+      - userdb
+
+
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    networks:
+      - backend
+      - frontend
+    ports:
+      - 8001:8080
+
