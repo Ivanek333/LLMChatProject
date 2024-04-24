@@ -9,6 +9,7 @@ Used technologies:
 - FluentValidation
 - Mapster
 - JWT authentication & authorization
+
 Microservices:
 - ChatWebAPI: responsible for communication with LLMs and storing messages and chats data
   Uses MySQL database
