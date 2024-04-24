@@ -12,7 +12,7 @@ Used technologies:
 
 Microservices:
 - ChatWebAPI: responsible for communication with LLMs and storing messages and chats data
-  Uses MySQL database
+  -  Uses MySQL database
 - AuthenticationWebAPI: handles authentication and stores users credetials in:
-  MsSQL database
+  -  MsSQL database
 - ApiGateway: uses Ocelot to merge and hide the backend part, leaving a single api endpoint
